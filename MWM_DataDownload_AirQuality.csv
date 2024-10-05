@@ -1,93 +1,82 @@
-﻿This tab has one table with the air quality (micrograms of PM2.5 per cubic metre) from 2017-18 to 2022-23 for 81 monitoring sites around Australia. It ranges from cell A1 to H92.,Measuring What Matters,,,,,,,,,,,,,,,,
-Table 1 Air quality (micrograms of PM2.5 per cubic metre) 2017-18 to 2022-23.,,,,,,,,,,,,,,,,,
-"Custom data request supplied by Department of Climate Change, Energy, the Environment and Water, July 2024",,,,,,,,,,,,,,,,,
-,,Micrograms of PM2.5 per cubic metre,,,,,,,,,,,,,,,
-Jurisdiction,Monitoring station location ,2017-18,2018-19,2019-20,2020-21,2021-22,2022-23,,,,,,,,,,
-Western Australia,Armadale (South East Metro),ND,ND,ND,ND,6.2,6.8,,,,,,,,,,
-Western Australia,Caversham (North East Metro),8.5,8,8,7.8,6.9,6.4,,,,,,,,,,
-Western Australia,Duncraig (North Metro),8.2,7.7,7.7,6.3,6.7,4.8,,,,,,,,,,
-Western Australia,Quinns Rocks (Outer North Coast),7.8,ND,ND,5.4,9.7,11,,,,,,,,,,
-Western Australia,South Lake (South East Metro),8.7,8.4,8.4,7.2,7.6,7.2,,,,,,,,,,
-Western Australia,Mandurah (Peel region),ND,ND,ND,10,6.7,7,,,,,,,,,,
-Western Australia,Albany (Southwest region),ND,ND,ND,ND,ND,4,,,,,,,,,,
-Western Australia,Bunbury (Southwest region),8.7,8.4,8.4,7.9,6.5,6.5,,,,,,,,,,
-Western Australia,Busselton (Southwest region),8.2,7.9,7.9,8.1,8.4,8.7,,,,,,,,,,
-Western Australia,Collie (Southwest region),ND,ND,ND,ND,5.4,11.4,,,,,,,,,,
-Western Australia,Geraldton (Midwest region),ND,ND,ND,8,7,4.2,,,,,,,,,,
-Western Australia,Kalgoorlie (Goldfields region),ND,5.1,5.1,4.7,4,4.2,,,,,,,,,,
-Northern Territory ,Katherine,ND,ND,ND,7.8,9.6,11.8,,,,,,,,,,
-Northern Territory ,Palmerston (Darwin),7.3,8.7,9.8,7,8.5,8.6,,,,,,,,,,
-Northern Territory ,Stokes Hill (Darwin),7.3,8.3,9.2,6.4,6.2,5.8,,,,,,,,,,
-Northern Territory ,Winnellie (Darwin),6.7,9.1,8.9,6.5,10.7,10.3,,,,,,,,,,
-Tasmania,Hobart,5.7,5.5,6.5,5.9,5.3,5.7,,,,,,,,,,
-Tasmania,Launceston,8.6,7.9,7.6,7.5,6.6,6.9,,,,,,,,,,
-Tasmania,Devonport,6.7,6.6,7,6.2,5.8,5.5,,,,,,,,,,
-Australian Capital Territory ,Florey,ND,7.1,14.8,16.9,6.2,5,,,,,,,,,,
-Australian Capital Territory ,Monash,ND,6.8,14.1,17.8,6.8,5.3,,,,,,,,,,
-Australian Capital Territory ,Civic,ND,6.5,12.8,ND,ND,ND,,,,,,,,,,
-Queensland ,Mountain Creek (SE Qld),ND,ND,ND,ND,5.7*,6,,,,,,,,,,
-Queensland ,Rocklea (SE Qld),7.3,6.4,8.7,6,4.6,6.1*,,,,,,,,,,
-Queensland ,Springwood (SE Qld),5.4,5.9,6.7,4.7,4.8,5.6*,,,,,,,,,,
-Queensland ,Southport (SE Qld),ND,6.5,8.3,5.3,4.6,4.1,,,,,,,,,,
-Queensland ,Flinders View (SE Qld) ,ND,ND,ND,ND,5.9*,5.6,,,,,,,,,,
-Queensland ,Toowoomba,ND,ND,ND,ND,ND,12.1,,,,,,,,,,
-Queensland ,South Gladstone,5.6,5.5,6.4,5.6,5,11,,,,,,,,,,
-Queensland ,West Mackay,ND,ND,ND,5.9,5.7,16.7,,,,,,,,,,
-Queensland ,North Ward (Townsville),ND,5.6,7,5.8,5.8,15.2,,,,,,,,,,
-Queensland ,The Gap (Mount Isa),ND,ND,ND,ND,ND,13.4,,,,,,,,,,
-New South Wales,Bargo (Sydney) ,ND,6.8,10.4,7.8,5.3,3.7,,,,,,,,,,
-New South Wales,Bringelly (Sydney) ,7.5,8,11.3,8.5,7.2,5.1,,,,,,,,,,
-New South Wales,Camden (Sydney),6.7,7.2,11.8,7.7,6.1,4.4,,,,,,,,,,
-New South Wales,Campbelltown West (Sydney),7.4,8.4,ND,7.5,6.3,4.6,,,,,,,,,,
-New South Wales,Chullora (Sydney),9.5,8.6,ND,8.8,7.2,ND,,,,,,,,,,
-New South Wales,Cook and Phillip (Sydney),ND,ND,ND,7.8*,6.4,4.3,,,,,,,,,,
-New South Wales,Earlwood (Sydney),7.3,7.8,10.5,8,6.6,5.2,,,,,,,,,,
-New South Wales,Lidcombe (Sydney),ND,ND,ND,ND,6.1,4.7,,,,,,,,,,
-New South Wales,Liverpool (Sydney),8.9,10.1,12.8,9.1,7.9,5.5,,,,,,,,,,
-New South Wales,Macquarie Park (Sydney),ND,7,9.2,7.1,7.3,4.4,,,,,,,,,,
-New South Wales,Oakdale (Sydney),6,6.9,13.2,6.7,4.5,3.5,,,,,,,,,,
-New South Wales,Parramatta North (Sydney),ND,9.2,10.5,8.2,6.6,5.2,,,,,,,,,,
-New South Wales,Penrith (Sydney),ND,ND,ND,ND,7.9,5.8,,,,,,,,,,
-New South Wales,Prospect (Sydney),7.7,8.5,11.9,8.6,6.9,5.3,,,,,,,,,,
-New South Wales,Randwick (Sydney),ND,7.6,10.8,7.6*,6.4,4.9,,,,,,,,,,
-New South Wales,Richmond (Sydney),7,8.1,ND,8.4,6.8,4.8,,,,,,,,,,
-New South Wales,Rouse Hill (Sydney),ND,ND,12.7,7.1,5.9,4.6,,,,,,,,,,
-New South Wales,Rozelle (Sydney),7.2,ND,10.3,7.5,6.3,4.6,,,,,,,,,,
-New South Wales,St Marys (Sydney),ND,7.8,9.8,7.6*,5.8,3.9,,,,,,,,,,
-New South Wales,Albion Park South (Illawarra),6.6*,6.8,8.6,6.8,4.8,3.8,,,,,,,,,,
-New South Wales,Kembla Grange (Illawarra),6.9,7,8.8,7,5.1,4,,,,,,,,,,
-New South Wales,Wollongong (Illawarra),7.1,7.3,9,7.8*,5.7,4.7,,,,,,,,,,
-New South Wales,Wyong (Central Coast),5.8,6.8,10.5,5.6,4.7,4,,,,,,,,,,
-New South Wales,Morisset (Lake Macquarie),ND,ND,ND,ND,3.9,2.7,,,,,,,,,,
-New South Wales,Beresfield (Lower Hunter),7.6,8.7,12.1,7.7,5.9,5,,,,,,,,,,
-New South Wales,Newcastle (Lower Hunter),7.4,7.8,10.9,ND,6.3,5.5,,,,,,,,,,
-New South Wales,Wallsend (Lower Hunter),7.3,7.5,10.4,7.3,6.1,5.1,,,,,,,,,,
-New South Wales,Merriwa (Upper Hunter),ND,ND,ND,ND,ND,3.4,,,,,,,,,,
-New South Wales,Muswellbrook (Upper Hunter),ND,ND,ND,9.3,7.3,6.2,,,,,,,,,,
-New South Wales,Singleton (Upper Hunter),ND,ND,ND,8.4,6.3,5.1,,,,,,,,,,
-New South Wales,Bathurst (Central Tablelands),6.1,7,11.3,7.6,5.1,4.1,,,,,,,,,,
-New South Wales,Orange (Central Tablelands),ND,ND,15.8,9.1,6.6,5.2,,,,,,,,,,
-New South Wales,Gunnedah (North West Slopes) ,ND,9,11.2,7.7,6.5,ND,,,,,,,,,,
-New South Wales,Narrabri (North West Slopes),ND,4.9,7.8,5.5,3.1*,3.6,,,,,,,,,,
-New South Wales,Tamworth (North West Slopes),7.8,8.3,14.4,6.8,5.1,4.7,,,,,,,,,,
-New South Wales,Armidale (Northern Tablelands),ND,ND,17.2,9.2,7.2,7.1,,,,,,,,,,
-New South Wales,Albury (South-west Slopes),7.3*,7.3,10.1,11.1,7.3,5.6,,,,,,,,,,
-New South Wales,Wagga Wagga North (South-west Slopes),8.1,8.4,11.3,10.7,6.3,5.3,,,,,,,,,,
-New South Wales,Goulburn (Southern Tablelands),ND,ND,ND,11.8,5.6,4.1,,,,,,,,,,
-South Australia,CBD (Adelaide),ND,ND,ND,ND,ND,5.1,,,,,,,,,,
-South Australia,Birkenhead (Adelaide),ND,ND,ND,ND,ND,3.8,,,,,,,,,,
-South Australia,Netley (Adelaide) ,8.8,7.3,6.2,5.4,5.6,4.4,,,,,,,,,,
-South Australia,North Haven (Adelaide),6.7,7.2,6,4.8,5,4.3,,,,,,,,,,
-South Australia,Elizabeth Downs (Adelaide),7.3*,6.5,6.1,ND,ND,ND,,,,,,,,,,
-Victoria ,Alphington ,ND,7.9,7.6,7.84,ND,ND,,,,,,,,,,
-Victoria ,Footscray,ND,7.7,7.5,8.47,ND,ND,,,,,,,,,,
-Victoria ,Geelong South,ND,6.5,6.4,7.78,ND,ND,,,,,,,,,,
-Victoria ,Melbourne CBD,ND,ND,ND,7.84,ND,ND,,,,,,,,,,
-Victoria ,Traralgon ,ND,8.1,8.9,8.99,ND,ND,,,,,,,,,,
-ND = Not Determined,,,,,,,,,,,,,,,,,
-"* Indicates sites which did not meet the 75% coverage requirement for at least one quarter. Further details available at https://www.nepc.gov.au/nepms/ambient-air-quality.  Where data has been provided, it should be interpreted as being indicative only.",,,,,,,,,,,,,,,,,
-"PM2.5 refers to particulate matter with a diameter of 2.5 micrometers (0.0025mm) or less. These very small particles are a common air pollutant and can be produced by smoke from fires, car and truck exhausts, and from industrial emmissions. ",,,,,,,,,,,,,,,,,
-Data for Victoria for 2021-22 and 2022-23 is not yet available.,,,,,,,,,,,,,,,,,
-"The data is sourced from jurisdictional monitoring undertaken in compliance with the National Environment Protection (Ambient Air Quality) Measure. The National Environment Protection Measure includes technical, performance and location requirements that must be met by monitoring stations. ",,,,,,,,,,,,,,,,,
-"Data is made public annually in National Environment Protection Council annual reports (https://www.nepc.gov.au/publications/annual-reports), however only data up until the 2018-19 period is publicly available at present. The subsequent data sets are unpublished and have been sourced directly; these are expected to be publicly available in the near future.",,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,
+﻿Jurisdiction,Monitoring station location ,2017-18,2018-19,2019-20,2020-21,2021-22,2022-23
+Western Australia,Armadale (South East Metro),ND,ND,ND,ND,6.2,6.8
+Western Australia,Caversham (North East Metro),8.5,8,8,7.8,6.9,6.4
+Western Australia,Duncraig (North Metro),8.2,7.7,7.7,6.3,6.7,4.8
+Western Australia,Quinns Rocks (Outer North Coast),7.8,ND,ND,5.4,9.7,11
+Western Australia,South Lake (South East Metro),8.7,8.4,8.4,7.2,7.6,7.2
+Western Australia,Mandurah (Peel region),ND,ND,ND,10,6.7,7
+Western Australia,Albany (Southwest region),ND,ND,ND,ND,ND,4
+Western Australia,Bunbury (Southwest region),8.7,8.4,8.4,7.9,6.5,6.5
+Western Australia,Busselton (Southwest region),8.2,7.9,7.9,8.1,8.4,8.7
+Western Australia,Collie (Southwest region),ND,ND,ND,ND,5.4,11.4
+Western Australia,Geraldton (Midwest region),ND,ND,ND,8,7,4.2
+Western Australia,Kalgoorlie (Goldfields region),ND,5.1,5.1,4.7,4,4.2
+Northern Territory ,Katherine,ND,ND,ND,7.8,9.6,11.8
+Northern Territory ,Palmerston (Darwin),7.3,8.7,9.8,7,8.5,8.6
+Northern Territory ,Stokes Hill (Darwin),7.3,8.3,9.2,6.4,6.2,5.8
+Northern Territory ,Winnellie (Darwin),6.7,9.1,8.9,6.5,10.7,10.3
+Tasmania,Hobart,5.7,5.5,6.5,5.9,5.3,5.7
+Tasmania,Launceston,8.6,7.9,7.6,7.5,6.6,6.9
+Tasmania,Devonport,6.7,6.6,7,6.2,5.8,5.5
+Australian Capital Territory ,Florey,ND,7.1,14.8,16.9,6.2,5
+Australian Capital Territory ,Monash,ND,6.8,14.1,17.8,6.8,5.3
+Australian Capital Territory ,Civic,ND,6.5,12.8,ND,ND,ND
+Queensland ,Mountain Creek (SE Qld),ND,ND,ND,ND,5.7*,6
+Queensland ,Rocklea (SE Qld),7.3,6.4,8.7,6,4.6,6.1*
+Queensland ,Springwood (SE Qld),5.4,5.9,6.7,4.7,4.8,5.6*
+Queensland ,Southport (SE Qld),ND,6.5,8.3,5.3,4.6,4.1
+Queensland ,Flinders View (SE Qld) ,ND,ND,ND,ND,5.9*,5.6
+Queensland ,Toowoomba,ND,ND,ND,ND,ND,12.1
+Queensland ,South Gladstone,5.6,5.5,6.4,5.6,5,11
+Queensland ,West Mackay,ND,ND,ND,5.9,5.7,16.7
+Queensland ,North Ward (Townsville),ND,5.6,7,5.8,5.8,15.2
+Queensland ,The Gap (Mount Isa),ND,ND,ND,ND,ND,13.4
+New South Wales,Bargo (Sydney) ,ND,6.8,10.4,7.8,5.3,3.7
+New South Wales,Bringelly (Sydney) ,7.5,8,11.3,8.5,7.2,5.1
+New South Wales,Camden (Sydney),6.7,7.2,11.8,7.7,6.1,4.4
+New South Wales,Campbelltown West (Sydney),7.4,8.4,ND,7.5,6.3,4.6
+New South Wales,Chullora (Sydney),9.5,8.6,ND,8.8,7.2,ND
+New South Wales,Cook and Phillip (Sydney),ND,ND,ND,7.8*,6.4,4.3
+New South Wales,Earlwood (Sydney),7.3,7.8,10.5,8,6.6,5.2
+New South Wales,Lidcombe (Sydney),ND,ND,ND,ND,6.1,4.7
+New South Wales,Liverpool (Sydney),8.9,10.1,12.8,9.1,7.9,5.5
+New South Wales,Macquarie Park (Sydney),ND,7,9.2,7.1,7.3,4.4
+New South Wales,Oakdale (Sydney),6,6.9,13.2,6.7,4.5,3.5
+New South Wales,Parramatta North (Sydney),ND,9.2,10.5,8.2,6.6,5.2
+New South Wales,Penrith (Sydney),ND,ND,ND,ND,7.9,5.8
+New South Wales,Prospect (Sydney),7.7,8.5,11.9,8.6,6.9,5.3
+New South Wales,Randwick (Sydney),ND,7.6,10.8,7.6*,6.4,4.9
+New South Wales,Richmond (Sydney),7,8.1,ND,8.4,6.8,4.8
+New South Wales,Rouse Hill (Sydney),ND,ND,12.7,7.1,5.9,4.6
+New South Wales,Rozelle (Sydney),7.2,ND,10.3,7.5,6.3,4.6
+New South Wales,St Marys (Sydney),ND,7.8,9.8,7.6*,5.8,3.9
+New South Wales,Albion Park South (Illawarra),6.6*,6.8,8.6,6.8,4.8,3.8
+New South Wales,Kembla Grange (Illawarra),6.9,7,8.8,7,5.1,4
+New South Wales,Wollongong (Illawarra),7.1,7.3,9,7.8*,5.7,4.7
+New South Wales,Wyong (Central Coast),5.8,6.8,10.5,5.6,4.7,4
+New South Wales,Morisset (Lake Macquarie),ND,ND,ND,ND,3.9,2.7
+New South Wales,Beresfield (Lower Hunter),7.6,8.7,12.1,7.7,5.9,5
+New South Wales,Newcastle (Lower Hunter),7.4,7.8,10.9,ND,6.3,5.5
+New South Wales,Wallsend (Lower Hunter),7.3,7.5,10.4,7.3,6.1,5.1
+New South Wales,Merriwa (Upper Hunter),ND,ND,ND,ND,ND,3.4
+New South Wales,Muswellbrook (Upper Hunter),ND,ND,ND,9.3,7.3,6.2
+New South Wales,Singleton (Upper Hunter),ND,ND,ND,8.4,6.3,5.1
+New South Wales,Bathurst (Central Tablelands),6.1,7,11.3,7.6,5.1,4.1
+New South Wales,Orange (Central Tablelands),ND,ND,15.8,9.1,6.6,5.2
+New South Wales,Gunnedah (North West Slopes) ,ND,9,11.2,7.7,6.5,ND
+New South Wales,Narrabri (North West Slopes),ND,4.9,7.8,5.5,3.1*,3.6
+New South Wales,Tamworth (North West Slopes),7.8,8.3,14.4,6.8,5.1,4.7
+New South Wales,Armidale (Northern Tablelands),ND,ND,17.2,9.2,7.2,7.1
+New South Wales,Albury (South-west Slopes),7.3*,7.3,10.1,11.1,7.3,5.6
+New South Wales,Wagga Wagga North (South-west Slopes),8.1,8.4,11.3,10.7,6.3,5.3
+New South Wales,Goulburn (Southern Tablelands),ND,ND,ND,11.8,5.6,4.1
+South Australia,CBD (Adelaide),ND,ND,ND,ND,ND,5.1
+South Australia,Birkenhead (Adelaide),ND,ND,ND,ND,ND,3.8
+South Australia,Netley (Adelaide) ,8.8,7.3,6.2,5.4,5.6,4.4
+South Australia,North Haven (Adelaide),6.7,7.2,6,4.8,5,4.3
+South Australia,Elizabeth Downs (Adelaide),7.3*,6.5,6.1,ND,ND,ND
+Victoria ,Alphington ,ND,7.9,7.6,7.84,ND,ND
+Victoria ,Footscray,ND,7.7,7.5,8.47,ND,ND
+Victoria ,Geelong South,ND,6.5,6.4,7.78,ND,ND
+Victoria ,Melbourne CBD,ND,ND,ND,7.84,ND,ND
+Victoria ,Traralgon ,ND,8.1,8.9,8.99,ND,ND
