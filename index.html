@@ -3,92 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Map Visualization</title>
+    <title>Global Air Quality Index (AQI)</title>
     <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.1"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            display: flex;
+            flex-direction: row;
+        }
+        .main-content {
+            flex: 3;
+            margin-right: 20px;
+        }
+        .sidebar {
+            flex: 1;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #4a90e2;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 2em;
+            color: #4a90e2;
+            margin-top: 100px;
+            margin-bottom: 10px;
+        }
+        #vis, #vis1 {
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
         }
         #vis {
             width: 800px;
             height: 450px;
         }
+        #vis1 {
+            width: 600px;
+            height: 600px;
+        }
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin: 10px 0;
+            max-width: 800px;
+        }
+        footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #777;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <a href="https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/homework_w8.html" target="_blank">Open Map Visualization</a>
-    <h1>Global Air Quality Index (AQI)</h1>
-    <div id="vis"></div>
+    <div class="main-content">
+        <h1>Global Air Quality Index (AQI)</h1>
+        
+        <p>The Global Air Quality Index (AQI) visualizes the air quality data across different countries. By using this map, you can quickly identify which regions have higher levels of pollution based on the AQI values.</p>
+        
+        <div id="vis"></div>
 
-    <script>
-        const spec = {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 800,
-    "height": 450,
-    "background": "lightblue",
-    "title": "Global Air Quality Index (AQI)",
-    "projection": {"type": "equalEarth"},
-    "layer": [
-      {
-        "data": {
-          "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/ne_1.json",
-          "format": {"type": "topojson", "feature": "ne_10m_admin_0_countries"}
-        },
-        "mark": {"type": "geoshape", "stroke": "black", "strokeWidth": 1, "fill": "grey"},
-        "encoding": {
-          "tooltip": [
-            {"field": "properties.NAME", "type": "nominal", "title": "Country"},
-            {"field": "AQI Value", "type": "quantitative", "title": "AQI Value"}
-          ]
-        }
-      },
-      {
-        "data": {
-          "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/ne_1.json",
-          "format": {"type": "topojson", "feature": "ne_10m_admin_0_countries"}
-        },
-        "mark": {"type": "geoshape", "stroke": "black"},
-        "transform": [
-          {
-            "lookup": "properties.NAME",
-            "from": {
-              "data": {
-                "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/e96242165520fe25a1b9a6d0834a93466e59b663/pollution_fixed.csv",
-                "format": {"type": "csv"}
-              },
-              "key":"Country",
-              "fields": ["AQI Value"]
-            }
-          }
-        ],
-        "encoding": {
-          "color": {
-            "field": "AQI Value",
-            "type": "quantitative",
-            "scale": {"scheme": "reds"},
-            "title": "AQI Value"
-          },
-          "tooltip": [
-            {"field": "properties.NAME", "type": "nominal", "title": "Country"},
-            {"field": "AQI Value", "type": "quantitative", "title": "AQI Value"}
-          ]
-        }
-      },
-      {
-        "data": {
-          "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/ne_1.json",
-          "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
-        },
-        "mark": {"type": "geoshape", "stroke": "gray", "strokeWidth": 1, "fill": null}
-      }
-    ]
-  };
+        <script>
+            const spec = {
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "width": 800,
+                "height": 450,
+                "background": "lightblue",
+                "title": "Global Air Quality Index (AQI)",
+                "projection": {"type": "equalEarth"},
+                "layer": [
+                    {
+                        "data": {
+                            "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/ne_1.json",
+                            "format": {"type": "topojson", "feature": "ne_10m_admin_0_countries"}
+                        },
+                        "mark": {"type": "geoshape", "stroke": "black", "strokeWidth": 1, "fill": "grey"},
+                        "encoding": {
+                            "tooltip": [
+                                {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+                                {"field": "AQI Value", "type": "quantitative", "title": "AQI Value"}
+                            ]
+                        }
+                    },
+                    {
+                        "data": {
+                            "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/ne_1.json",
+                            "format": {"type": "topojson", "feature": "ne_10m_admin_0_countries"}
+                        },
+                        "mark": {"type": "geoshape", "stroke": "black"},
+                        "transform": [
+                            {
+                                "lookup": "properties.NAME",
+                                "from": {
+                                    "data": {
+                                        "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/e96242165520fe25a1b9a6d0834a93466e59b663/pollution_fixed.csv",
+                                        "format": {"type": "csv"}
+                                    },
+                                    "key": "Country",
+                                    "fields": ["AQI Value"]
+                                }
+                            }
+                        ],
+                        "encoding": {
+                            "color": {
+                                "field": "AQI Value",
+                                "type": "quantitative",
+                                "scale": {"scheme": "reds"},
+                                "title": "AQI Value"
+                            },
+                            "tooltip": [
+                                {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+                                {"field": "AQI Value", "type": "quantitative", "title": "AQI Value"}
+                            ]
+                        }
+                    },
+                    {
+                        "data": {
+                            "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/ne_1.json",
+                            "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+                        },
+                        "mark": {"type": "geoshape", "stroke": "gray", "strokeWidth": 1, "fill": null}
+                    }
+                ]
+            };
 
-        vegaEmbed('#vis', spec).then(result => {
-            console.log(result);
-        }).catch(console.error);
-    </script>
-</body>
-</html>
+            vegaEmbed('#vis', spec).then(result => {
+                console.log(result);
+            }).catch(console.error);
+        </script>
+        
+        <h2>Average Air Quality Index (AQI) by Jurisdiction</h2>
+        
+        <p>Select a year to view the average AQI across various jurisdictions. This information is crucial for understanding the air quality trends and their impact on public health.</p>
+
+        <div id="vis1"></div>
+
+        <script>
+            const spec2 = {
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "title": {
+                    "text": "Average Air Quality Index (AQI) by Jurisdiction",
+                    "fontSize": 16,
+                    "anchor": "start",
+                    "color": "#000000"
+                },
+                "width": 600,
+                "height": 600,
+                "data": {
+                    "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/MWM_DataDownload_AirQuality.csv",
+                    "format": {
+                        "type": "csv"
+                    }
+                },
+                "transform": [
+                    {
+                        "fold": [
+                            "2017-18", "2018-19", "2019-20", "2020-21", "2021-22", "2022-23"
+                        ],
+                        "as": ["Year", "AQI"]
+                    },
+                    { 
+                        "filter": {"selection": "yearSelector"}
+                    }
+                ],
+                "mark": "bar",
+                "encoding": {
+                    "x": {
+                        "field": "Jurisdiction",
+                        "type": "nominal",
+                        "axis": {"labelAngle": 45}
+                    },
+                    "y": {
+                        "field": "AQI",
+                        "type": "quantitative",
+                        "aggregate": "mean"
+                    },
+                    "color": {
+                        "field": "Jurisdiction",
+                        "type": "nominal"
+                    },
+                    "tooltip": [
+                        {"field": "Jurisdiction", "type": "nominal", "title": "Jurisdiction"},
+                        {"field": "Year", "type": "nominal", "title": "Year"},
+                        {"aggregate": "mean", "field": "AQI", "type": "quantitative", "title": "Average AQI"}
+                    ]
+                },
+                "selection": {
+                    "yearSelector": {
+                        "type": "single",
+                        "fields": ["Year"],
+                        "bind": {
+                            "input": "select",
+                            "options": ["2017-18", "2018-19", "2019-20", "2020-21", "2021-22", "2022-23"],
+                            "name": "Select Year:"
+                        },
+                        "init": {"Year": "2022-23"}
+                    }
+                }
+            };
+
+            vegaEmbed('#vis1', spec2).then(result => {
+                console.log(result);
+            }).catch(console.error);
+        </script>
+    </div>
+    
+    <div class="sidebar">
+        <h1>Additional Information</h1
