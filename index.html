@@ -3,234 +3,685 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Air Quality Index (AQI)</title>
-    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.1"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Flexbox Layout with Vega-Lite Graph</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f7f9fc;
             margin: 0;
-            padding: 20px;
-            color: #333;
+            padding: 0;
+            background-color: #f7f9fc;
+        }
+
+        .container {
             display: flex;
-            flex-direction: row;
+            flex-direction: column; /* Stack elements vertically */
+            gap: 10px; /* Space between items */
+            padding: 20px;
         }
-        .main-content {
-            flex: 3;
-            margin-right: 20px;
-        }
-        .sidebar {
-            flex: 1;
-            background-color: #ffffff;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            font-size: 2.5em;
-            color: #4a90e2;
-            margin-bottom: 10px;
-        }
-        h2 {
-            font-size: 2em;
-            color: #4a90e2;
-            margin-top: 100px;
-            margin-bottom: 10px;
-        }
-        #vis, #vis1 {
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            background-color: #ffffff;
-        }
-        #vis {
-            width: 800px;
-            height: 450px;
-        }
-        #vis1 {
-            width: 600px;
-            height: 600px;
-        }
-        label {
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        select {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-            margin: 10px 0;
-        }
-        p {
-            font-size: 1.1em;
-            line-height: 1.6;
-            margin: 10px 0;
-            max-width: 800px;
-        }
-        footer {
-            margin-top: 30px;
-            font-size: 0.9em;
-            color: #777;
+
+        .header {
+            background-color: #5378a1;
+            color: white;
             text-align: center;
+            padding: 20px;
+        }
+
+        .row {
+            display: flex; /* Create a flex container for each row */
+            gap: 10px; /* Space between items in the row */
+        }
+
+        .text {
+        font-size: 15px; /* Adjust as necessary */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: justify; /* Text will be justified within the container */
+        height: 100%; /* Take the full height of the box */
+        width: 100%;  /* Take the full width of the box */
+        line-height: 1.5; /* Adjust for better spacing between lines */
+        padding: 20px;
+        }
+
+        .box {
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            overflow: hidden; /* To contain large content */
+            flex: 1 auto; /* Allow boxes to grow equally */
+        }
+
+        .box_text {
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            overflow: hidden; /* To contain large content */
+            flex: 1 auto; /* Allow boxes to grow equally */
+            width: 30%;
+        }
+
+
+    
+        .footer {
+            background-color: #5378a1;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .row {
+                flex-direction: column; /* Stack boxes vertically on small screens */
+            }
         }
     </style>
+    <!-- Vega-Lite libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.1"></script>
 </head>
 <body>
-    <div class="main-content">
-        <h1>Global Air Quality Index (AQI)</h1>
-        
-        <p>The Global Air Quality Index (AQI) visualizes the air quality data across different countries. By using this map, you can quickly identify which regions have higher levels of pollution based on the AQI values.</p>
-        
-        <div id="vis"></div>
 
-        <script>
-            const spec = {
-                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-                "width": 800,
-                "height": 450,
-                "background": "lightblue",
-                "title": "Global Air Quality Index (AQI)",
-                "projection": {"type": "equalEarth"},
-                "layer": [
-                    {
-                        "data": {
-                            "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/ne_1.json",
-                            "format": {"type": "topojson", "feature": "ne_10m_admin_0_countries"}
-                        },
-                        "mark": {"type": "geoshape", "stroke": "black", "strokeWidth": 1, "fill": "grey"},
-                        "encoding": {
-                            "tooltip": [
-                                {"field": "properties.NAME", "type": "nominal", "title": "Country"},
-                                {"field": "AQI Value", "type": "quantitative", "title": "AQI Value"}
-                            ]
-                        }
-                    },
-                    {
-                        "data": {
-                            "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/ne_1.json",
-                            "format": {"type": "topojson", "feature": "ne_10m_admin_0_countries"}
-                        },
-                        "mark": {"type": "geoshape", "stroke": "black"},
-                        "transform": [
-                            {
-                                "lookup": "properties.NAME",
-                                "from": {
-                                    "data": {
-                                        "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/e96242165520fe25a1b9a6d0834a93466e59b663/pollution_fixed.csv",
-                                        "format": {"type": "csv"}
-                                    },
-                                    "key": "Country",
-                                    "fields": ["AQI Value"]
-                                }
-                            }
-                        ],
-                        "encoding": {
-                            "color": {
-                                "field": "AQI Value",
-                                "type": "quantitative",
-                                "scale": {"scheme": "reds"},
-                                "title": "AQI Value"
-                            },
-                            "tooltip": [
-                                {"field": "properties.NAME", "type": "nominal", "title": "Country"},
-                                {"field": "AQI Value", "type": "quantitative", "title": "AQI Value"}
-                            ]
-                        }
-                    },
-                    {
-                        "data": {
-                            "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/ne_1.json",
-                            "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
-                        },
-                        "mark": {"type": "geoshape", "stroke": "gray", "strokeWidth": 1, "fill": null}
-                    }
-                ]
-            };
+<div class="container">
+    <!-- Full width header -->
+    <div class="header">
+        <h1>Air Quality and Air Pollution Worldwide</h1>
+    </div>
 
-            vegaEmbed('#vis', spec).then(result => {
-                console.log(result);
-            }).catch(console.error);
-        </script>
+    <!-- Row 1 -->
+    <div class="row">
+        <div class="box">
+            <div id="vis"></div>
+        </div>
+        <div class ='box_text'> 
+            <div class ='text'>
+            <p>The Air Quality Index (AQI) is a standardized system used to measure and communicate the quality of the air in a specific location. It is based on the concentrations of key pollutants, including ground-level ozone, particulate matter (PM2.5 and PM10), carbon monoxide, sulfur dioxide, and nitrogen dioxide. The AQI provides an easy-to-understand scale ranging from 0 to 500, where lower values indicate good air quality, and higher values represent increasingly hazardous conditions. Typically, AQI is divided into six categories: good (0-50), moderate (51-100), unhealthy for sensitive groups (101-150), unhealthy (151-200), very unhealthy (201-300), and hazardous (301-500).<p\>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="row">
+        <div class="box"><div id="vis3"></div></div>
+        <div class ='box_text'> 
+          <div class ='text'>
+          <p>The image showcases two visualizations focused on global air quality in 2010. On the left, a bar chart displays Concentrations of Fine Particulate Matter (PM2.5) across six global regions: Africa, Americas, Eastern Mediterranean, Europe, South-East Asia, and Western Pacific. PM2.5 refers to tiny particles in the air that are small enough to penetrate deep into the lungs, posing serious health risks. Unsurprisingly, South-East Asia and the Eastern Mediterranean lead with the highest average concentrations, nearing or exceeding 35 µg/m³, which is significantly above the World Health Organization’s safe exposure limit of 10 µg/m³. These regions are known for rapid industrialization and urbanization, contributing heavily to air pollution. Meanwhile, the Americas and Western Pacific regions show lower PM2.5 levels, around 15-20 µg/m³. Fun fact: PM2.5 particles are small enough to be invisible to the human eye but can cause serious health issues like heart and lung disease!
+
+            The scatterplot on the right compares Average AQI (Air Quality Index) with CO AQI (Carbon Monoxide AQI) for various countries. The majority of countries are clustered in the lower AQI ranges, indicating moderate levels of overall pollution and carbon monoxide. However, a few outliers with higher AQI and CO AQI scores suggest that some countries are facing severe pollution challenges, likely driven by high emissions from vehicles, factories, and deforestation. Fun fact: Carbon monoxide is colorless and odorless, making it especially dangerous as it can build up in the bloodstream without notice, leading to poisoning.<p\>
+          </div>
+      </div>
+        <div class="box"><div id="vis6"></div></div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="row">
+        <div class="box_text">
+          <div class ='text'>
+          <p>The image illustrates global CO2 emissions trends from 1970 to 2021, focusing on key countries and the global total.Notably, China’s emissions have skyrocketed since the early 2000s, surpassing 10,000 Mt CO2/yr by 2021, reflecting its rapid industrialization and economic growth. Meanwhile, emissions from the United States, which were once much higher, have leveled off and even declined, thanks in part to cleaner energy practices and emissions policies. Similarly, the United Kingdom has seen a marked reduction, despite its history as the birthplace of the Industrial Revolution, now embracing renewables like wind and solar. Australia, Russia, and the UK show relatively flat emission patterns compared to China and the U.S.
+
+            The bottom graph highlights the steady rise in global CO2 emissions, peaking near 40,000 Mt CO2/yr by 2021. This steady growth reflects increased energy consumption, particularly in developing nations, as industrialization and population growth drive emissions upwards. Despite emission reductions in some developed nations, the world continues to face the challenge of reducing global CO2 emissions. Fun fact: although certain countries have slowed their emissions, the world still hasn't hit its global peak, a critical step to addressing climate change.<p\>
+          </div></div>
+        <div class="box"><div id="vis4"></div></div>
+
+    </div>
+
+    <!-- Row 4 -->
+    <div class="row">
+        <div class="box"><div id="vis1"></div></div>
+        <div class="box"><div id="vis5"></div></div>
+    </div>
+
+    <!-- Row 5 -->
+    <div class="row">
+      <div class="box_text">
+        <div class ='text'>
+        <p>Australia's air quality and energy consumption have evolved significantly over the past few decades, shaped by natural forces, industrialization, and growing environmental consciousness. Air quality across Australian states has long been a concern, especially with the country’s frequent natural disasters, such as bushfires and dust storms, that heavily affect air pollution levels. The bar chart illustrating the "Average Air Quality Index (AQI) by Australian State" highlights the variation between jurisdictions. States like the Northern Territory and Queensland display higher AQI values, which may be linked to more industrial activity, such as mining and resource extraction, as well as seasonal factors like bushfire smoke and dust from the arid interior. In contrast, Tasmania and Victoria exhibit lower AQI levels, which could be attributed to fewer pollution sources, denser vegetation, and more stringent air quality controls. Despite ongoing efforts to curb pollution, events like the 2019-2020 "Black Summer" bushfires severely impacted air quality nationwide, with some regions recording dangerously high AQI levels due to widespread smoke.
+
+          Energy consumption in Australia mirrors the country’s rich endowment of natural resources. Historically, Australia has been heavily reliant on fossil fuels, particularly coal, for electricity generation. As one of the world’s largest coal producers, coal has dominated the energy landscape for much of the 20th and early 21st centuries. The pie chart on "Australian Energy Consumption" reflects this ongoing reliance, with coal still constituting a significant portion of the energy mix. Gas and oil also play crucial roles in meeting Australia’s energy demands, particularly in areas like heating, transport, and industrial use. This dependency on fossil fuels has made Australia a major emitter of greenhouse gases, contributing to its global environmental footprint.
+          
+          However, recent years have seen a growing shift toward cleaner, renewable energy sources, driven by both government policies and public pressure to address climate change. Australia’s Renewable Energy Target (RET), aimed at increasing the proportion of electricity generated from renewable sources, has spurred investments in solar, wind, and hydroelectric power. States like South Australia are leading this renewable energy revolution, with a high penetration of wind and solar power in their energy mix. By 2020, Australia had exceeded its RET target, generating more than 33,000 GWh of renewable energy annually. The green slice of the pie chart represents this growing share of renewables, which continues to expand, although coal and gas remain dominant. This ongoing transition reflects Australia’s broader efforts to balance its economic reliance on fossil fuels with the need to reduce emissions and meet global climate commitments.<p\>
+        </div></div> 
+    </div>
+
+    <!-- Full width footer -->
+    <div class="footer">
         
-        <h2>Average Air Quality Index (AQI) by Jurisdiction</h2>
-        
-        <p>Select a year to view the average AQI across various jurisdictions. This information is crucial for understanding the air quality trends and their impact on public health.</p>
+    </div>
+</div>
 
-        <div id="vis1"></div>
+<!-- Vega-Lite Visualization Script -->
+<script>
+    const spec2 = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Average Air Quality Index (AQI) by Australian State",
+    "fontSize": 25,
+    "anchor": "center",
+    "color": "#000000"
+  },
+  "width": 500,  /* Adjusted to fit in the box */
+  "height": 500, /* Adjusted to fit in the box */
+  "data": {
+    "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/MWM_DataDownload_AirQuality.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "fold": [
+        "2017-18", "2018-19", "2019-20", "2020-21", "2021-22", "2022-23"
+      ],
+      "as": ["Year", "AQI"]
+    },
+    {
+      "filter": {"selection": "yearSelector"}
+    },
+    {
+      "aggregate": [
+        {"op": "average", "field": "AQI", "as": "Average AQI"}
+      ],
+      "groupby": ["Jurisdiction", "Year"]
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "color": "#5378a1"  // Set the bar color to grey
+  },
+  "encoding": {
+    "x": {
+      "field": "Jurisdiction",
+      "type": "nominal",
+      "axis": {"labelAngle": 45}
+    },
+    "y": {
+      "field": "Average AQI",  // Use the averaged field
+      "type": "quantitative"
+    },
+    
+    "tooltip": [
+      {"field": "Jurisdiction", "type": "nominal", "title": "State"},
+      {"field": "Year", "type": "nominal", "title": "Year"},
+      {"field": "Average AQI", "type": "quantitative", "title": "Average AQI", "format": ".2f"} // Updated for 2 decimal places
+    ]
+  },
+  "selection": {
+    "yearSelector": {
+      "type": "single",
+      "fields": ["Year"],
+      "bind": {
+        "input": "select",
+        "options": ["2017-18", "2018-19", "2019-20", "2020-21", "2021-22", "2022-23"],
+        "name": "Select Year:"
+      },
+      "init": {"Year": "2022-23"}
+    }
+  }
+}
+;
 
-        <script>
-            const spec2 = {
-                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-                "title": {
-                    "text": "Average Air Quality Index (AQI) by Jurisdiction",
-                    "fontSize": 16,
-                    "anchor": "start",
-                    "color": "#000000"
-                },
-                "width": 600,
-                "height": 600,
+    vegaEmbed('#vis1', spec2).then(result => {
+        console.log(result);
+    }).catch(console.error);
+</script>
+
+<script>
+    const spec = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+        "width": 750,
+        "height": 450,
+        "title": {
+            "text": "Global Air Quality Index (AQI)",
+            "fontSize": 25,
+            "anchor": "center",
+            "color": "#000000"
+        },
+        "projection": {"type": "equalEarth"},
+        "layer": [
+            {
                 "data": {
-                    "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/MWM_DataDownload_AirQuality.csv",
-                    "format": {
-                        "type": "csv"
-                    }
+                    "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/ne_1.json",
+                    "format": {"type": "topojson", "feature": "ne_10m_admin_0_countries"}
                 },
+                "mark": {"type": "geoshape", "stroke": "black", "strokeWidth": 1, "fill": "grey"},
+                "encoding": {
+                    "tooltip": [
+                        {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+                        {"field": "AQI Value", "type": "quantitative", "title": "AQI Value"}
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/ne_1.json",
+                    "format": {"type": "topojson", "feature": "ne_10m_admin_0_countries"}
+                },
+                "mark": {"type": "geoshape", "stroke": "black"},
                 "transform": [
                     {
-                        "fold": [
-                            "2017-18", "2018-19", "2019-20", "2020-21", "2021-22", "2022-23"
-                        ],
-                        "as": ["Year", "AQI"]
-                    },
-                    { 
-                        "filter": {"selection": "yearSelector"}
+                        "lookup": "properties.NAME",
+                        "from": {
+                            "data": {
+                                "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/e96242165520fe25a1b9a6d0834a93466e59b663/pollution_fixed.csv",
+                                "format": {"type": "csv"}
+                            },
+                            "key": "Country",
+                            "fields": ["AQI Value"]
+                        }
                     }
                 ],
-                "mark": "bar",
                 "encoding": {
-                    "x": {
-                        "field": "Jurisdiction",
-                        "type": "nominal",
-                        "axis": {"labelAngle": 45}
-                    },
-                    "y": {
-                        "field": "AQI",
-                        "type": "quantitative",
-                        "aggregate": "mean"
-                    },
                     "color": {
-                        "field": "Jurisdiction",
-                        "type": "nominal"
+                        "field": "AQI Value",
+                        "type": "quantitative",
+                        "scale": {"scheme": "reds"},
+                        "title": "AQI Value"
                     },
                     "tooltip": [
-                        {"field": "Jurisdiction", "type": "nominal", "title": "Jurisdiction"},
-                        {"field": "Year", "type": "nominal", "title": "Year"},
-                        {"aggregate": "mean", "field": "AQI", "type": "quantitative", "title": "Average AQI"}
+                        {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+                        {"field": "AQI Value", "type": "quantitative", "title": "AQI Value"}
                     ]
-                },
-                "selection": {
-                    "yearSelector": {
-                        "type": "single",
-                        "fields": ["Year"],
-                        "bind": {
-                            "input": "select",
-                            "options": ["2017-18", "2018-19", "2019-20", "2020-21", "2021-22", "2022-23"],
-                            "name": "Select Year:"
-                        },
-                        "init": {"Year": "2022-23"}
-                    }
                 }
-            };
+            },
+            {
+                "data": {
+                    "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/ne_1.json",
+                    "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+                },
+                "mark": {"type": "geoshape", "stroke": "gray", "strokeWidth": 1, "fill": null}
+            }
+        ]
+    };
 
-            vegaEmbed('#vis1', spec2).then(result => {
-                console.log(result);
-            }).catch(console.error);
-        </script>
-    </div>
+    vegaEmbed('#vis', spec).then(result => {
+        console.log(result);
+    }).catch(console.error);
+</script>
+
+<script>
+    const spec3 = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Concentrations of Fine Particulate Matter (PM2.5)",
+    "fontSize": 25,
+    "anchor": "center",
+    "fontWeight": "bold",
+    "lineHeight": 1.2
+  },
+  "width": 400,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/data.csv",
+    "format": {"type": "csv"}
+  },
+  "params": [
+    {
+      "name": "selectedYear",
+      "value": 2010,
+      "bind": {
+        "input": "range",
+        "min": 2010,
+        "max": 2019,
+        "step": 1,
+        "name": "Year"
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.Period == selectedYear"
+    },
+    {
+      "aggregate": [{"op": "mean", "field": "FactValueNumeric", "as": "mean_FactValueNumeric"}],
+      "groupby": ["ParentLocation"]
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "color": "#5378a1"  // Set the bar color to grey
+  },
+  "encoding": {
+    "x": {
+      "field": "ParentLocation",
+      "type": "nominal",
+      "axis": {"title": "Regions", "labelAngle": 45}
+    },
+    "y": {
+      "field": "mean_FactValueNumeric",
+      "type": "quantitative",
+      "axis": {"title": "Average PM2.5 Values"}
+    },
     
-    <div class="sidebar">
-        <h1>Additional Information</h1
+    "tooltip": [
+      {"field": "ParentLocation", "type": "nominal", "title": "Region"},
+      {"value": "Year: ", "title": "Year"}, // Fixed value for Year label
+      {"field": "mean_FactValueNumeric", "type": "quantitative", "title": "Average PM2.5", "format": ".2f"} // Show average with 2 decimal places
+    ]
+  }
+}
+
+;
+
+    vegaEmbed('#vis3', spec3).then(result => {
+        console.log(result);
+    }).catch(console.error);
+</script>
+
+<script>
+    const spec4 = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+      "text": "CO2 Emissions: Australia, UK, US, China, and Russia (1970-2021)",
+      "fontSize": 25,
+      "anchor": "middle",
+      "fontWeight": "bold",
+      "lineHeight": 1.2
+    },
+    "width": 600,
+    "height": 600,
+    "data": {
+      "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/EDGARv7.0_FT2021_fossil_CO2_booklet_2022.csv",
+      "format": {"type": "csv"}
+    },
+    "transform": [
+      {
+        "fold": [
+          "1970", "1971", "1972", "1973", "1974", "1975",
+          "1976", "1977", "1978", "1979", "1980", "1981",
+          "1982", "1983", "1984", "1985", "1986", "1987",
+          "1988", "1989", "1990", "1991", "1992", "1993",
+          "1994", "1995", "1996", "1997", "1998", "1999",
+          "2000", "2001", "2002", "2003", "2004", "2005",
+          "2006", "2007", "2008", "2009", "2010", "2011",
+          "2012", "2013", "2014", "2015", "2016", "2017",
+          "2018", "2019", "2020", "2021"
+        ],
+        "as": ["Year", "Value"]
+      }
+    ],
+    "vconcat": [
+      {
+        "layer": [
+          {
+            "mark": "line",
+            "params": [
+              {
+                "name": "brush",
+                "select": {
+                  "type": "interval",
+                  "encodings": ["x"],
+                  "init": [{"Year": 2000}, {"Year": 2021}]
+                }
+              }
+            ],
+            "transform": [
+              {
+                "filter": {
+                  "field": "Country",
+                  "oneOf": ["Australia", "United Kingdom", "United States", "China", "Russia"]
+                }
+              }
+            ],
+            "encoding": {
+              "x": {
+                "field": "Year",
+                "type": "quantitative",
+                "scale": {"domain": {"param": "brush"}},
+                "axis": {"title": "Year"}
+              },
+              "y": {
+                "field": "Value",
+                "type": "quantitative",
+                "axis": {
+                  "title": "CO2 Emissions (Mt CO2/yr)",
+                  "tickCount": 5,
+                  "format": ".0f"
+                }
+              },
+              "color": {
+                "field": "Country",
+                "type": "nominal",
+                "legend": {"title": "Country"}
+              },
+              "tooltip": [
+                {"field": "Country", "type": "nominal", "title": "Country"},
+                {"field": "Year", "type": "quantitative", "title": "Year"},
+                {"field": "Value", "type": "quantitative", "title": "CO2 Emissions (Mt CO2/yr)", "format": ".2f"}
+              ]
+            },
+            "height": 300,
+            "width": 600
+          },
+          {
+            "mark": "text",
+            "encode": {
+              "enter": {
+                "text": {"field": "Country"},
+                "align": {"value": "left"},
+                "baseline": {"value": "middle"},
+                "dx": {"value": 5},
+                "dy": {"value": -5}
+              },
+              "update": {
+                "x": {
+                  "field": "Year",
+                  "scale": "x"
+                },
+                "y": {
+                  "field": "Value",
+                  "scale": "y"
+                },
+                "fill": {
+                  "scale": "color",
+                  "field": "Country"
+                },
+                "opacity": {"value": 1}
+              },
+              "hover": {
+                "opacity": {"value": 0.7}
+              }
+            },
+            "transform": [
+              {
+                "filter": {
+                  "field": "Country",
+                  "oneOf": ["Australia", "United Kingdom", "United States", "China", "Russia"]
+                }
+              }
+            ]
+          }
+        ],
+        "height": 300
+      },
+      {
+        "mark": "area",
+        "params": [{"name": "brush", "select": {"type": "interval", "encodings": ["x"]}}],
+        "encoding": {
+          "x": {
+            "field": "Year",
+            "type": "quantitative",
+            "axis": {"title": "Year"}
+          },
+          "y": {
+            "field": "Value",
+            "type": "quantitative",
+            "axis": {
+              "title": "Global CO2 Emissions (Mt CO2/yr)",
+              "tickCount": 5,
+              "format": ".0f"
+            }
+          },
+          "color": {
+            "field": "Country",
+            "type": "nominal",
+            "legend": {
+              "title": "Country",
+              "labelExpr": "datum.label === 'GLOBAL TOTAL' ? 'Global Total' : datum.label"
+            }
+          },
+          "tooltip": [
+            {"field": "Country", "type": "nominal", "title": "Country"},
+            {"field": "Year", "type": "quantitative", "title": "Year"},
+            {"field": "Value", "type": "quantitative", "title": "CO2 Emissions (Mt CO2/yr)", "format": ".2f"}
+          ]
+        },
+        "transform": [
+          {"filter": {"field": "Country", "equal": "GLOBAL TOTAL"}}
+        ],
+        "height": 150,
+        "width": 600
+      }
+    ]
+  }
+  
+  
+
+;
+
+    vegaEmbed('#vis4', spec4).then(result => {
+        console.log(result);
+    }).catch(console.error);
+</script>
+
+<script>
+    const spec5 = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A simple pie chart with labels.",
+  "title": {
+    "text": "Australian Energy Consumption",
+    "fontSize": 25,
+    "fontWeight": "bold",
+    "anchor": "middle"
+  },
+  "width": 500,
+  "height": 500,
+  "data": {
+    "values": [
+      {"category": "Coal", "value": 1525},
+      {"category": "Oil", "value": 2285},
+      {"category": "Gas", "value": 1518},
+      {"category": "Renewables", "value": 553}
+    ]
+  },
+  "encoding": {
+    "theta": {"field": "value", "type": "quantitative", "stack": true},
+    "color": {
+      "field": "category",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Coal", "Oil", "Gas", "Renewables"],
+        "range": ["#8c8c8c", "#d94e3d", "#d9b000", "#5e8c36"]
+      },
+      "legend": null
+    }
+  },
+  "layer": [
+    {
+      "mark": {"type": "arc", "outerRadius": 120},
+      "encoding": {
+        "tooltip": [
+          {"field": "category", "type": "nominal", "title": "Energy Source"},
+          {
+            "field": "value",
+            "type": "quantitative",
+            "title": "Consumption (Petajoules)",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "radius": 140},
+      "encoding": {
+        "text": {"field": "category", "type": "nominal"},
+        "tooltip": [
+          {"field": "category", "type": "nominal", "title": "Energy Source"},
+          {
+            "field": "value",
+            "type": "quantitative",
+            "title": "Consumption (Petajoules)",
+            "format": ",.0f"
+          }
+        ]
+      }
+    }
+  ]
+}
+
+
+
+
+;
+
+    vegaEmbed('#vis5', spec5).then(result => {
+        console.log(result);
+    }).catch(console.error);
+</script>
+
+<script>
+    const spec6 = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Average AQI vs. CO AQI by Country",
+    "fontSize": 25,
+    "anchor": "middle"
+  },
+  "width": 500,
+  "height": 500,
+  "data": {
+    "url": "https://raw.githubusercontent.com/sticks-mcghee/data-vis-2/refs/heads/main/global%20air%20pollution%20dataset.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {
+      "aggregate": [
+        {"op": "average", "field": "AQI Value", "as": "Average AQI"},
+        {"op": "average", "field": "CO AQI Value", "as": "Average CO AQI"}
+      ],
+      "groupby": ["Country"]
+    },
+    {
+      "filter": "datum['Average AQI'] > 0 && datum['Average CO AQI'] > 0"
+    }
+  ],
+  "mark": {
+    "type": "point",
+    "color": "#5378a1"
+  },
+  "encoding": {
+    "x": {
+      "field": "Average AQI",
+      "type": "quantitative",
+      "title": "Average AQI"
+    },
+    "y": {
+      "field": "Average CO AQI",
+      "type": "quantitative",
+      "title": "Average CO AQI"
+    },
+    "tooltip": [
+      {"field": "Country", "type": "nominal", "title": "Country"},
+      {"field": "Average AQI", "type": "quantitative", "title": "Average AQI", "format": ".2f"},
+      {"field": "Average CO AQI", "type": "quantitative", "title": "Average CO AQI", "format": ".2f"}
+    ]
+  }
+}
+
+
+;
+
+    vegaEmbed('#vis6', spec6).then(result => {
+        console.log(result);
+    }).catch(console.error);
+</script>
+
+</body>
+</html>
